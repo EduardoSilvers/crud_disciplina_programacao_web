@@ -3,37 +3,34 @@
 	if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
 		// recuperar os dados da requisição
-		$cliente_id = '';
+		$idcliente = '';
 
-		// validando campo cliente_id
-		if(isset($_GET['cliente_id'])){
-			$cliente_id = $_GET['cliente_id'];
+		// validando campo
+		if(isset($_GET['idcliente'])){
+			$idcliente = $_GET['idcliente'];
 		}
-
-		// conexão com o banco
-		if(empty($cliente_id)){
-			echo("Dados invalidos....");
+		if(empty($idcliente)){
+			echo("Cliente inválido");
 			exit();
 		}
-
 		// conectando no banco de dados
-		$usuario = "aromas.php";
-		$senha = "php2023*";
+		$usuario = "root";
+		$senha = "";
 		$pdo = new PDO(
-			"mysql:host=localhost;dbname=cliente",
+			"mysql:host=localhost;dbname=aromas",
 			$usuario,
 			$senha
 		);
 
 		$removecliente = $pdo->prepare(
-			"DELETE FROM `aromas_lavanderia` where id=?"
+			"DELETE FROM cliente where idcliente=?"
 		);
 
 		$removecliente->execute([
-			$cliente_id
+			$idcliente
 		]);
 
 
-		echo "Cliente removido com sucesso..";
+		echo "Cadastro removido com sucesso";
 	}
 ?>

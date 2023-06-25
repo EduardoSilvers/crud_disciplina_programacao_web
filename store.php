@@ -3,16 +3,12 @@
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 		// recuperar os dados da requisição
-		$idcliente = '';
 		$nome = '';
 		$cpf = '';
 		$telefone = '';
 		$data_nascimento = '';
-		
+
 		// validando campos
-		if(isset($_POST['idcliente'])){
-			$idcliente = $_POST['idcliente'];
-		}
 		if(isset($_POST['nome'])){
 			$nome = $_POST['nome'];
 		}
@@ -41,21 +37,23 @@
 			$senha
 		);
 
-		$atualizacliente = $pdo->prepare(
-			"UPDATE cliente 
-			SET nome=?, cpf=?, telefone=?, data_nascimento=? 
-			WHERE idcliente=?"
-		);
+		// criar o registro na tabela
+		$novocliente = $pdo->prepare(
+			"INSERT INTO cliente
+				(nome, cpf, telefone, data_nascimento)
+					values
+					(:nome, :cpf, :telefone, :data_nascimento);"
+		); // prepara a query
 
-		$atualizacliente->execute([
-			$nome,
-			$cpf,
-			$telefone,
-			$data_nascimento,
-			$idcliente
-		]);
+		// define as variaveis com os valores
+		$novocliente->bindParam(':nome', $nome);
+		$novocliente->bindParam(':cpf', $cpf);
+		$novocliente->bindParam(':telefone', $telefone);
+		$novocliente->bindParam(':data_nascimento', $data_nascimento);
 
+		// executar a inserção
+		$novocliente->execute();
 
-		echo "Cliente atualizado com sucesso.";
+		echo("Cliente cadastrado com sucesso.");
 	}
 ?>
