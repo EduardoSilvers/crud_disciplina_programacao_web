@@ -29,7 +29,7 @@
 	?>
 	<div class="container text-center">
 		<div class="row">
-			<h5>Clientes</h5>
+			<h5 class="mt-3 mb-3">Listagem de Clientes</h5>
 		</div>
 		<div class="row">
 			<div class="col"> 
@@ -38,14 +38,14 @@
 		</div>
 		
 		<div class="row">
-			<table class="table">
+			<table class="table mt-5">
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>nome</th>
-						<th>cpf</th>
-						<th>telefone</th>
-						<th>data de  nascimento</th>
+						<th>NOME</th>
+						<th>CPF</th>
+						<th>TELEFONE</th>
+						<th>DATA DE NASCIMENTO</th>
 						<th></th>
 					</tr>
 				</thead>
